@@ -70,6 +70,7 @@ app.get('/auth/facebook/callback',
   passport.authenticate('facebook', { successRedirect: '/',
   failureRedirect: '/login' }))
 */
+
 var server = app.listen(3000)
 var io = require('socket.io').listen(server)
 
