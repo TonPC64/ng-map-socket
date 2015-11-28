@@ -4,6 +4,7 @@ var bodyParser = require('body-parser')
 var jsonParser = bodyParser.json()
 
 app.use(express.static('public'))
+
 /*
 var passport = require('passport'),
   FacebookStrategy = require('passport-facebook').Strategy
