@@ -1,10 +1,18 @@
 angular.module('ionicApp', ['ionic', 'ngMap'])
 
-  .controller('MarkerRemoveCtrl', function ($scope, $ionicLoading, $interval) {
+  .controller('MarkerRemoveCtrl', function ($http, $scope, $ionicLoading, $interval) {
     $scope.positions = []
 
     $scope.$on('mapInitialized', function (event, map) {
       $scope.map = map
+    })
+
+    var socket = io.connect()
+
+    socket.on('push', function (data) {
+      console.log(data)
+      $scope.positions.push(data)
+      $scope.$apply()
     })
 
     $scope.centerOnMe = function () {
@@ -20,6 +28,7 @@ angular.module('ionicApp', ['ionic', 'ngMap'])
         console.log(pos)
         $scope.map.setCenter(pos)
         $ionicLoading.hide()
+        socket.emit('addUser', {lat: position.coords.latitude,lng: position.coords.longitude})
       })
 
     }

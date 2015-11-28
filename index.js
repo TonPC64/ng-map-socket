@@ -3,9 +3,19 @@ var app = express()
 
 app.use(express.static('public'))
 
-var server = app.listen(3000, function () {
-  var host = server.address().address
-  var port = server.address().port
+var server = app.listen(3000)
+var io = require('socket.io').listen(server)
 
-  console.log('Example app listening at http://%s:%s', host, port)
+io.on('connection', function (socket) {
+  console.log('a user connected')
+  socket.on('disconnect', function () {
+    console.log('user disconnected')
+  })
+  socket.on('addUser', function (data) {
+    console.log(data)
+    io.emit('push', data)
+  })
 })
+
+var bodyParser = require('body-parser')
+var jsonParser = bodyParser.json()
