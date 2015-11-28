@@ -28,7 +28,7 @@ angular.module('ionicApp', ['ionic', 'ngMap'])
         console.log(pos)
         $scope.map.setCenter(pos)
         $ionicLoading.hide()
-        socket.emit('addUser', {lat: position.coords.latitude,lng: position.coords.longitude})
+        socket.emit('shareLoc', {lat: position.coords.latitude,lng: position.coords.longitude})
       })
 
     }
@@ -42,7 +42,6 @@ angular.module('ionicApp', ['ionic', 'ngMap'])
     }, 1000)
 
     function showPosition (position) {
-      console.log('Latitude: ' + position.coords.latitude + 'Longitude: ' + position.coords.longitude)
       $scope.loc = {lat: position.coords.latitude,lng: position.coords.longitude}
       $scope.$apply()
     }
