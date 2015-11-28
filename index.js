@@ -71,7 +71,7 @@ app.get('/auth/facebook/callback',
   failureRedirect: '/login' }))
 */
 
-var server = app.listen(80)
+var server = app.listen(3000)
 var io = require('socket.io').listen(server)
 
 io.on('connection', function (socket) {
